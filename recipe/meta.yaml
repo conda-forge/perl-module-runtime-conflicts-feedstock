@@ -4,15 +4,15 @@
 
 package:
   name: {{ name }}
-  version: {{ version }}
+  version: "{{ version }}"
 
 source:
   url: https://cpan.metacpan.org/authors/id/E/ET/ETHER/Module-Runtime-Conflicts-{{ version }}.tar.gz
   sha256: {{ sha256 }}
 
 build:
-  skip: true   # [win]
-  number: 0
+  noarch: generic
+  number: 1
   run_exports:
     weak:
       - {{ name }} ={{ version }}
@@ -26,6 +26,8 @@ requirements:
     - perl-module-runtime
   run:
     - perl
+    - perl-module-runtime
+    - perl-dist-checkconflicts
 
 test:
   imports:
@@ -34,9 +36,7 @@ test:
 about:
   home: https://github.com/karenetheridge/Module-Runtime-Conflicts
   license: GPL-1.0-or-later OR Artistic-1.0-Perl
-  license_file:
-    - {{ environ["PREFIX"] }}/man/man1/perlartistic.1
-    - {{ environ["PREFIX"] }}/man/man1/perlgpl.1
+  license_file: LICENCE
   summary: 'Provide information on conflicts for Module::Runtime'
 
 extra:
